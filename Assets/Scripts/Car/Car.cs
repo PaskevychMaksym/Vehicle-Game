@@ -1,19 +1,28 @@
 using ScriptableObjects;
 using UnityEngine;
+using Zenject;
+
 namespace Car
 {
   public class Car : MonoBehaviour
   {
-    [SerializeField] private GameConfig gameConfig;
     private CarMover _carMover;
     private int _maxHealth;
     private int _currentHealth;
+    
+    private GameConfig _gameConfig;
+
+    [Inject]
+    private void Construct(GameConfig gameConfig)
+    {
+      _gameConfig = gameConfig;
+    }
 
     private void Awake()
     {
       _carMover = GetComponent<CarMover>();
       
-      var carParameters = gameConfig.CarParameters;
+      var carParameters = _gameConfig.CarParameters;
       _carMover.Initialize(carParameters.Speed);
 
       _maxHealth = carParameters.MaxHealth;
