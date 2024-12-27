@@ -17,8 +17,8 @@ MonoBehaviour:
     Speed: 13
     MaxHealth: 1
   _turretParameters:
-    RotationSpeed: 0.1
-    MaxRotationAngle: 10
+    RotationSpeed: 10
+    MaxRotationAngle: 60
     FireRate: 0.1
   _bulletParameters:
     BulletPrefab: {fileID: 0}
