@@ -5,19 +5,24 @@ using Zenject;
 
 public class MainSceneInstaller : MonoInstaller
 {
-    [SerializeField] private GameConfig _gameConfig;
-    [SerializeField] private Transform _poolParent;
+  [SerializeField] private GameConfig _gameConfig;
+  [SerializeField] private Transform _poolParent;
+
+  public override void InstallBindings()
+  {
+    Container.Bind<IInputService>().To<InputService>().AsSingle();
+    Container.Bind<GameConfig>().FromInstance(_gameConfig).AsSingle().NonLazy();
     
-    public override void InstallBindings()
-    {
-        Container.Bind<IInputService>().To<InputService>().AsSingle();
-        Container.Bind<BulletSpawner>().To<BulletSpawner>().AsSingle();
+    Container.Bind<ObjectFactory<Bullet>>()
+      .To<ObjectFactory<Bullet>>()
+      .AsSingle()
+      .WithArguments(_gameConfig.BulletParameters.BulletPrefab, _poolParent);
+    
+    Container.Bind<ObjectFactory<Enemy>>()
+      .To<ObjectFactory<Enemy>>()
+      .AsSingle()
+      .WithArguments(_gameConfig.EnemyParameters.EnemyPrefab, _poolParent);
         
-        Container.Bind<BulletFactory>()
-            .To<BulletFactory>()
-            .AsSingle()
-            .WithArguments(_poolParent);
-        
-        Container.Bind<GameConfig>().FromInstance(_gameConfig).AsSingle().NonLazy();
-    }
+    Container.Bind<BulletSpawner>().To<BulletSpawner>().AsSingle();
+  }
 }

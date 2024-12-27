@@ -4,11 +4,11 @@ using Zenject;
 
 public class BulletSpawner
 {
-  private readonly BulletFactory _bulletFactory;
+  private readonly ObjectFactory<Bullet> _bulletFactory;
   private readonly GameConfig _gameConfig;
 
   [Inject]
-  public BulletSpawner(GameConfig gameConfig, BulletFactory bulletFactory)
+  public BulletSpawner(GameConfig gameConfig, ObjectFactory<Bullet> bulletFactory)
   {
     _gameConfig = gameConfig;
     _bulletFactory = bulletFactory;
@@ -16,7 +16,7 @@ public class BulletSpawner
 
   public void FireBullet(Vector3 position, Quaternion rotation)
   {
-    Bullet bullet = _bulletFactory.CreateBullet();
+    Bullet bullet = _bulletFactory.CreateObject();
     bullet.transform.position = position;
     bullet.transform.rotation = rotation;
     bullet.Initialize(_gameConfig.BulletParameters.LifeTime, _bulletFactory);

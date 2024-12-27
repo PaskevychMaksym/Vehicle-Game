@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Interfaces;
 using UnityEngine;
 
-public class ObjectPool<T> : IObjectPool<T> where T : MonoBehaviour
+public class ObjectPool<T> where T : MonoBehaviour
 {
   private readonly Queue<T> _pool = new Queue<T>();
   private readonly T _prefab;

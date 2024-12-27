@@ -5,9 +5,9 @@ public class Bullet : MonoBehaviour
   private float _speed;
   private float _lifeTime;
   private float _lifeTimer;
-  private BulletFactory _factory;
+  private ObjectFactory<Bullet> _factory;
 
-  public void Initialize(float lifeTime, BulletFactory factory)
+  public void Initialize(float lifeTime, ObjectFactory<Bullet> factory)
   {
     _lifeTime = lifeTime;
     _factory = factory;
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
 
   private void ReturnToPool()
   {
-    _factory.ReturnBullet(this);
+    _factory.ReturnObject(this);
     _lifeTimer = 0f;
     gameObject.SetActive(false);
   }
