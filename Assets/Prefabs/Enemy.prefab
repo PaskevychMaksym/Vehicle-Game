@@ -67,9 +67,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3
-  m_Height: 1.5
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &4062587999019629660
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111,15 +111,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3254435015639674347, guid: a842843ef63958345af30ff353483807, type: 3}
       propertyPath: m_LocalScale.x
-      value: 30.000002
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3254435015639674347, guid: a842843ef63958345af30ff353483807, type: 3}
       propertyPath: m_LocalScale.y
-      value: 30.000002
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3254435015639674347, guid: a842843ef63958345af30ff353483807, type: 3}
       propertyPath: m_LocalScale.z
-      value: 30.000002
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3254435015639674347, guid: a842843ef63958345af30ff353483807, type: 3}
       propertyPath: m_LocalPosition.x
