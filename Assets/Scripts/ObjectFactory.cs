@@ -1,4 +1,3 @@
-using ScriptableObjects;
 using UnityEngine;
 
 public class ObjectFactory<T> where T : MonoBehaviour
