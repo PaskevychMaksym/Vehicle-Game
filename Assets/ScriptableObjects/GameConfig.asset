@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carParameters:
     CarPrefab: {fileID: 3472935732474495694, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
-    Speed: 8
+    Speed: 4
     MaxHealth: 10
   _turretParameters:
     RotationSpeed: 60
@@ -34,7 +34,7 @@ MonoBehaviour:
     Damage: 1
     ChaseDistance: 20
   _enemiesSpawnParameters:
-    StartAmount: 6
+    StartAmount: 5
     Interval: 0.5
     RangeX: 7
     Distance: 30

@@ -11,6 +11,7 @@ namespace Enemy
     [SerializeField] private EnemyMover _enemyMover;
     [SerializeField] private EnemyVisualEffects _enemyVisualEffects;
     [SerializeField] private Collider _collider;
+    [SerializeField] private HealthSlider _healthSlider;
 
     private StateMachine<EnemyController> _stateMachine;
     private EnemyAnimator _animator;
@@ -23,6 +24,7 @@ namespace Enemy
     public EnemyParameters Parameters => _parameters;
     public Car.Car Target => _target;
     public Health Health => _health;
+    public HealthSlider HealthSlider => _healthSlider;
     public EnemyAnimator Animator => _animator;
     public EnemyMover EnemyMover => _enemyMover;
     public StateMachine<EnemyController> StateMachine => _stateMachine;
@@ -41,6 +43,8 @@ namespace Enemy
 
       _health = new Health(_parameters.MaxHealth);
       _health.OnDeath += HandleDeath;
+      
+      _healthSlider.Initialize(_health, transform);
 
       _stateMachine.ChangeState(new IdleState());
     }
@@ -75,6 +79,7 @@ namespace Enemy
     {
       _enemyVisualEffects.ChangeMaterial();
       _health.TakeDamage(damage);
+      _healthSlider.UpdateSlider();
     }
   }
 }
