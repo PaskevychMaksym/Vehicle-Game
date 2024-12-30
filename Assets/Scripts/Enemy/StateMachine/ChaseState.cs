@@ -16,5 +16,4 @@ namespace Enemy.StateMachine
     
     public override void Exit() { }
   }
-
 }

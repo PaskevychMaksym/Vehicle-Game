@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class ObjectPool<T> where T : MonoBehaviour
 {
+  private const int DEFAULT_VALUE = 10;
+  
   private readonly Queue<T> _pool = new Queue<T>();
   private readonly T _prefab;
   private readonly Transform _parent;
 
-  public ObjectPool(T prefab, Transform parent = null, int initialCapacity = 10)
+  public ObjectPool(T prefab, Transform parent = null, int initialCapacity = DEFAULT_VALUE)
   {
     _prefab = prefab;
     _parent = parent;

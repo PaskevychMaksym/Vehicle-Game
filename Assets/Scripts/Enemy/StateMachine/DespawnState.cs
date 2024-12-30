@@ -13,5 +13,4 @@ namespace Enemy.StateMachine
     public override void Update(EnemyController owner) {}
     public override void Exit() {}
   }
-
 }

@@ -9,6 +9,8 @@ namespace Enemy
   {
     [SerializeField] private Animator _enemyAnimator;
     [SerializeField] private EnemyMover _enemyMover;
+    [SerializeField] private EnemyVisualEffects _enemyVisualEffects;
+    [SerializeField] private Collider _collider;
 
     private StateMachine<EnemyController> _stateMachine;
     private EnemyAnimator _animator;
@@ -25,12 +27,14 @@ namespace Enemy
     public EnemyMover EnemyMover => _enemyMover;
     public StateMachine<EnemyController> StateMachine => _stateMachine;
     public ObjectFactory<EnemyController> Factory => _factory;
+    public EnemyVisualEffects EnemyVisualEffects => _enemyVisualEffects;
 
     public void Initialize (EnemyParameters parameters, Car.Car target, ObjectFactory<EnemyController> factory)
     {
       _parameters = parameters;
       _target = target;
       _factory = factory;
+      _collider.enabled = true;
 
       _animator = new EnemyAnimator(_enemyAnimator);
       _stateMachine = new StateMachine<EnemyController>(this);
@@ -43,7 +47,8 @@ namespace Enemy
 
     public void HandleDeath()
     {
-      _stateMachine.ChangeState(new ExplodeState());
+      _collider.enabled = false;
+      _stateMachine.ChangeState(new DieState());
     }
 
     private void Update()
@@ -60,11 +65,16 @@ namespace Enemy
     {
       if (other.transform == _target.transform)
       {
-        _stateMachine.ChangeState(new ExplodeState());
+        _stateMachine.ChangeState(new DieState());
       }
     }
 
     private bool ShouldBeReturnedToPool() => _target != null && transform.position.z < _target.transform.position.z - _parameters.DespawnDistance;
-    public void TakeDamage (int damage) => _health.TakeDamage(damage);
+
+    public void TakeDamage (int damage)
+    {
+      _enemyVisualEffects.ChangeMaterial();
+      _health.TakeDamage(damage);
+    }
   }
 }
