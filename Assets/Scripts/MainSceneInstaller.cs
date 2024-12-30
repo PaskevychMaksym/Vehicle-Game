@@ -22,10 +22,10 @@ public class MainSceneInstaller : MonoInstaller
       .AsSingle()
       .WithArguments(_gameConfig.BulletParameters.BulletPrefab, _poolParent);
     
-    Container.Bind<ObjectFactory<Enemy>>()
-      .To<ObjectFactory<Enemy>>()
+    Container.Bind<ObjectFactory<Enemy.EnemyController>>()
+      .To<ObjectFactory<Enemy.EnemyController>>()
       .AsSingle()
-      .WithArguments(_gameConfig.EnemyParameters.EnemyPrefab, _poolParent);
+      .WithArguments(_gameConfig.EnemyParameters.EnemyControllerPrefab, _poolParent);
         
     Container.Bind<BulletSpawner>().To<BulletSpawner>().AsSingle();
   }

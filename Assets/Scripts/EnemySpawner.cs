@@ -9,21 +9,21 @@ public class EnemySpawner : MonoBehaviour
 {
   private float _maxDistanceToFinish;
   
-  private ObjectFactory<Enemy> _enemyFactory;
-  private Transform _carTransform;
+  private ObjectFactory<Enemy.EnemyController> _enemyFactory;
+  private Car.Car _target;
   private Transform _finishTransform;
   private EnemyParameters _enemyParameters;
   private EnemiesSpawnParameters _spawnParameters;
 
   [Inject]
   private void Construct(
-    ObjectFactory<Enemy> enemyFactory,
-    Car.Car car, 
+    ObjectFactory<Enemy.EnemyController> enemyFactory,
+    Car.Car target, 
     Transform finishTransform,
     GameConfig gameConfig)
   {
     _enemyFactory = enemyFactory;
-    _carTransform = car.transform;
+    _target = target;
     _finishTransform = finishTransform;
     _enemyParameters = gameConfig.EnemyParameters;
     _spawnParameters = gameConfig.EnemiesSpawnParameters;
@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
 
   private void Start()
   {
-    _maxDistanceToFinish = Vector3.Distance(_carTransform.position, _finishTransform.position);
+    _maxDistanceToFinish = Vector3.Distance(_target.transform.position, _finishTransform.position);
     SpawnInitialEnemies();
     StartCoroutine(SpawnEnemiesRoutine());
   }
@@ -58,16 +58,16 @@ public class EnemySpawner : MonoBehaviour
   {
     Vector3 spawnPosition = GetRandomSpawnPosition();
     Quaternion spawnRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-    Enemy enemy = _enemyFactory.CreateObject();
-    enemy.transform.position = spawnPosition;
-    enemy.transform.rotation = spawnRotation;
+    Enemy.EnemyController enemyController = _enemyFactory.CreateObject();
+    enemyController.transform.position = spawnPosition;
+    enemyController.transform.rotation = spawnRotation;
 
-    enemy.Initialize(_enemyParameters, _carTransform, _enemyFactory);
+    enemyController.Initialize(_enemyParameters, _target, _enemyFactory);
   }
   
   private Vector3 GetRandomSpawnPosition()
   {
-    Vector3 spawnPosition = _carTransform.position + _carTransform.forward * _spawnParameters.Distance;
+    Vector3 spawnPosition = _target.transform.position + _target.transform.forward * _spawnParameters.Distance;
     spawnPosition.x += Random.Range(-_spawnParameters.RangeX, _spawnParameters.RangeX);
     spawnPosition.y = 0;
     return spawnPosition;
@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
   
   private float CalculateProgress()
   {
-    float currentDistance = Vector3.Distance(_carTransform.position, _finishTransform.position);
+    float currentDistance = Vector3.Distance(_target.transform.position, _finishTransform.position);
     return currentDistance / _maxDistanceToFinish;
   }
 }

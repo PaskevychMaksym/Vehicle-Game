@@ -2,7 +2,8 @@ namespace Interfaces
 {
   public interface IDamageable
   {
-    public void TakeDamage(float damage);
-    public bool IsAlive();
+    public int CurrentHealth { get; }
+    public void TakeDamage(int damage);
+    public void Die();
   }
 }
