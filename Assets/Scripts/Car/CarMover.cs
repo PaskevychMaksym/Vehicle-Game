@@ -23,7 +23,7 @@ public class CarMover : MonoBehaviour
   {
     if (_isMoving && _carRigidbody != null)
     {
-      _carRigidbody.AddForce(transform.forward * _acceleration, ForceMode.Acceleration);
+      _carRigidbody.velocity = transform.forward * _acceleration;
     }
   }
 }

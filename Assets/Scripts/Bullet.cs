@@ -1,22 +1,25 @@
+using Parameters;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
   private float _speed;
+  private int _damage;
   private float _lifeTime;
   private float _lifeTimer;
   private ObjectFactory<Bullet> _factory;
 
-  public void Initialize(float lifeTime, ObjectFactory<Bullet> factory)
+  public void Initialize(BulletParameters parameters, ObjectFactory<Bullet> factory)
   {
-    _lifeTime = lifeTime;
+    _lifeTime = parameters.LifeTime;
+    _damage = parameters.Damage;
     _factory = factory;
     _lifeTimer = 0f;
   }
 
-  public void Launch(float speed)
+  public void Launch(BulletParameters parameters)
   {
-    _speed = speed;
+    _speed = parameters.Speed;
     GetComponent<Rigidbody>().velocity = transform.forward * _speed;
   }
 
@@ -37,11 +40,11 @@ public class Bullet : MonoBehaviour
     gameObject.SetActive(false);
   }
 
-  private void OnCollisionEnter(Collision collision)
+  private void OnTriggerEnter(Collider other)
   {
-    if (collision.gameObject.TryGetComponent(out Enemy enemy))
+    if (other.TryGetComponent(out Enemy.EnemyController enemy))
     {
-      enemy.Die();
+      enemy.TakeDamage(_damage);
     }
     
     ReturnToPool();

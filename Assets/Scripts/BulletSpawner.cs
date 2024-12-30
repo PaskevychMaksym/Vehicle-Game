@@ -19,8 +19,8 @@ public class BulletSpawner
     Bullet bullet = _bulletFactory.CreateObject();
     bullet.transform.position = position;
     bullet.transform.rotation = rotation;
-    bullet.Initialize(_gameConfig.BulletParameters.LifeTime, _bulletFactory);
-    bullet.Launch(_gameConfig.BulletParameters.Speed);
+    bullet.Initialize(_gameConfig.BulletParameters, _bulletFactory);
+    bullet.Launch(_gameConfig.BulletParameters);
     bullet.gameObject.SetActive(true);
   }
 }
