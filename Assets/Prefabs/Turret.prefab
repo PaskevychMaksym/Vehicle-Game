@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3124192854474173249}
   - component: {fileID: -4465941873154201187}
   - component: {fileID: 73123724886175209}
+  - component: {fileID: 8005931990642947527}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 6163747218796692877}
+  _turretVisualEffects: {fileID: 8005931990642947527}
 --- !u!114 &73123724886175209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +93,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20faa9b066cd26446bdc066e34bd0417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8005931990642947527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516584610668367465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5488c9a74eb7f4392dd75f3885fdae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagedMaterial: {fileID: 2100000, guid: 602a5c8f3e67d164b947b90bd5ca042c, type: 2}
+  _renderer: {fileID: 7004516951701926879}
 --- !u!1001 &546374677330606925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9d37eabae81e4b439f819f17d192bdb, type: 3}
+--- !u!23 &7004516951701926879 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7394936777073100946, guid: d9d37eabae81e4b439f819f17d192bdb, type: 3}
+  m_PrefabInstance: {fileID: 546374677330606925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7613553549781727600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7943745297734713917, guid: d9d37eabae81e4b439f819f17d192bdb, type: 3}

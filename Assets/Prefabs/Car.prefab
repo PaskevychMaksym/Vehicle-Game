@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4802809214534412534}
   - component: {fileID: 3997952777501117931}
   - component: {fileID: 102571608404344022}
+  - component: {fileID: 6587459477427465154}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -36,6 +37,7 @@ Transform:
   - {fileID: 7236886350964340674}
   - {fileID: 8541242431799279071}
   - {fileID: 5384983121145918780}
+  - {fileID: 1566118759250134829}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3472935732474495694
@@ -51,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carMover: {fileID: 4802809214534412534}
+  _carVisualEffects: {fileID: 6587459477427465154}
   _healthSlider: {fileID: 7142304372709256213}
 --- !u!114 &4802809214534412534
 MonoBehaviour:
@@ -112,6 +115,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
+--- !u!114 &6587459477427465154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837002362704913023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7663080b24efe7b41abb65fd9141a4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damagedMaterial: {fileID: 2100000, guid: 602a5c8f3e67d164b947b90bd5ca042c, type: 2}
+  _renderer: {fileID: 4009312551371497526}
+  _explosionEffect: {fileID: 6757592651881159041}
 --- !u!1001 &3161252348795941277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -305,6 +323,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7004516951701926879, guid: fa19b1cdced259442afbb523b23ca11b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a1fd75b0216d6f4080340e47f2b174b, type: 2}
     - target: {fileID: 7516584610668367465, guid: fa19b1cdced259442afbb523b23ca11b, type: 3}
       propertyPath: m_Name
       value: Turret
@@ -318,6 +340,113 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3124192854474173249, guid: fa19b1cdced259442afbb523b23ca11b, type: 3}
   m_PrefabInstance: {fileID: 6760970004165596830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6825255320664388764
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6338777648419139998}
+    m_Modifications:
+    - target: {fileID: 252174348396342557, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 252174348396342557, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 252174348396342557, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 252174348396342557, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 681240561280153223, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_Name
+      value: CarExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693954247732886418, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050457090903130567, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492094715791997253, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+--- !u!4 &1566118759250134829 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5405398429983945649, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+  m_PrefabInstance: {fileID: 6825255320664388764}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6757592651881159041 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 252174348396342557, guid: 196d25ae3e947c04693b9c323f9e5beb, type: 3}
+  m_PrefabInstance: {fileID: 6825255320664388764}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8185670802427347061
 PrefabInstance:
@@ -371,11 +500,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 5060542658204360771, guid: 51423a29b3a89884d9ace9eba7abedd6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b1fe2275ecc66b47ad99b3ca13cd4d3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51423a29b3a89884d9ace9eba7abedd6, type: 3}
+--- !u!23 &4009312551371497526 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5060542658204360771, guid: 51423a29b3a89884d9ace9eba7abedd6, type: 3}
+  m_PrefabInstance: {fileID: 8185670802427347061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7236886350964340674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1582960235723765687, guid: 51423a29b3a89884d9ace9eba7abedd6, type: 3}

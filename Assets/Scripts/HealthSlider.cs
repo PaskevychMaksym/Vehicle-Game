@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ public class HealthSlider: MonoBehaviour
 
     _health.OnDeath += Hide;
     Show();
+  }
+
+  private void Awake()
+  {
+    Hide();
   }
 
   public void LateUpdate()

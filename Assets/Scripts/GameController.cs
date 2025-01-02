@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     
     _startMenu.OnStartGame += StartGame;
     _conclusionMenu.OnRestart += RestartGame;
+    _carController.OnDestroyed += () => EndGame(false);
     
     _startMenu.Show();
   }

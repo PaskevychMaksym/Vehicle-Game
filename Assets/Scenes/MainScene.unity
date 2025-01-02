@@ -190,7 +190,7 @@ MonoBehaviour:
   _gameConfig: {fileID: 11400000, guid: 58655cbbae09264459fc5bcfa17fd0c4, type: 2}
   _gameController: {fileID: 1084741836}
   _poolParent: {fileID: 1878734236}
-  _car: {fileID: 1988488750}
+  _carController: {fileID: 1988488750}
   _finishLine: {fileID: 6963238257808086430}
   _camerasController: {fileID: 1257018532}
   _startMenu: {fileID: 812410519}
@@ -2309,6 +2309,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6338777648419139998, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822779989428296159, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822779989428296159, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6886921523510837574, guid: be71a414c941d0c4bad9ee135233acec, type: 3}

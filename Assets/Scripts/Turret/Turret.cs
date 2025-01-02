@@ -7,6 +7,7 @@ namespace Turret
   public class Turret : MonoBehaviour
   {
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private TurretVisualEffects _turretVisualEffects;
 
     private BulletSpawner _bulletSpawner;
     private float _fireRate;
@@ -16,13 +17,15 @@ namespace Turret
     [Inject]
     private void Construct(BulletSpawner bulletSpawner, 
       GameConfig gameConfig,
-      GameController gameController)
+      GameController gameController,
+      Car.CarController carController)
     {
       _bulletSpawner = bulletSpawner;
       _fireRate = gameConfig.TurretParameters.FireRate;
       
       gameController.OnGameStarted += ActivateTurret;
       gameController.OnGameEnded += DeactivateTurret;
+      carController.OnDestroyed += () => _turretVisualEffects.ChangeMaterial();
     }
 
     private void Update()

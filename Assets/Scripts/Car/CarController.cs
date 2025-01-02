@@ -1,3 +1,4 @@
+using System;
 using ScriptableObjects;
 using UnityEngine;
 using Zenject;
@@ -6,14 +7,16 @@ namespace Car
 {
   public class CarController : MonoBehaviour
   {
+    public event Action OnDestroyed;
+    
     [SerializeField] private CarMover _carMover;
+    [SerializeField] private CarVisualEffects _carVisualEffects;
     [SerializeField] private HealthSlider _healthSlider;
     
     private Health _health;
     private Transform _followCameraTransform;
 
     private GameConfig _gameConfig;
-    private GameController _gameController;
 
     public Health Health => _health;
 
@@ -23,11 +26,10 @@ namespace Car
       CamerasController camerasController)
     {
       _gameConfig = gameConfig;
-      _gameController = gameController;
       _followCameraTransform = camerasController.GetCamera(Enums.CameraType.Follow).transform;
 
-      _gameController.OnGameStarted += StartCar;
-      _gameController.OnGameEnded += StopCar;
+      gameController.OnGameStarted += StartCar;
+      gameController.OnGameEnded += StopCar;
     }
 
     private void Awake()
@@ -37,21 +39,14 @@ namespace Car
 
       _health = new Health(carParameters.MaxHealth);
       _health.OnDeath +=  CarDestroyed;
-      
-      _healthSlider.Initialize(_health,_followCameraTransform);
 
       _carMover.ToggleEngine(false);
-    }
-
-    private void OnDestroy()
-    {
-      _gameController.OnGameStarted -= StartCar;
-      _gameController.OnGameEnded -= StopCar;
     }
 
     private void StartCar()
     {
       _carMover.ToggleEngine(true);
+      _healthSlider.Initialize(_health,_followCameraTransform);
     }
     
     private void StopCar()
@@ -68,7 +63,9 @@ namespace Car
     private void CarDestroyed()
     {
       _carMover.ToggleEngine(false);
-      _gameController.EndGame(false);
+      _carVisualEffects.TriggerExplosion();
+      
+      OnDestroyed?.Invoke();
     }
   }
 }
