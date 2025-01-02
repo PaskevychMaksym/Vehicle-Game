@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class EnemySpawner : MonoBehaviour
 {
   private float _maxDistanceToFinish;
+  private bool _isGameRunning;
   
   private ObjectFactory<Enemy.EnemyController> _enemyFactory;
   private Car.Car _target;
@@ -20,20 +21,23 @@ public class EnemySpawner : MonoBehaviour
     ObjectFactory<Enemy.EnemyController> enemyFactory,
     Car.Car target, 
     Transform finishTransform,
-    GameConfig gameConfig)
+    GameConfig gameConfig,
+    GameController gameController)
   {
     _enemyFactory = enemyFactory;
     _target = target;
     _finishTransform = finishTransform;
     _enemyParameters = gameConfig.EnemyParameters;
     _spawnParameters = gameConfig.EnemiesSpawnParameters;
+    
+    gameController.OnGameStarted += StartSpawning;
+    gameController.OnGameEnded += StopSpawning;
   }
 
   private void Start()
   {
     _maxDistanceToFinish = Vector3.Distance(_target.transform.position, _finishTransform.position);
     SpawnInitialEnemies();
-    StartCoroutine(SpawnEnemiesRoutine());
   }
 
   private void SpawnInitialEnemies()
@@ -43,10 +47,16 @@ public class EnemySpawner : MonoBehaviour
       SpawnEnemy();
     }
   }
+
+  private void StartSpawning()
+  {
+    _isGameRunning = true;
+    StartCoroutine(SpawnEnemiesRoutine());
+  }
   
   private IEnumerator SpawnEnemiesRoutine()
   {
-    while (CalculateProgress() > 0.2f)
+    while (_isGameRunning && CalculateProgress() > 0.2f)
     {
       yield return new WaitForSeconds(_spawnParameters.Interval);
       
@@ -77,5 +87,10 @@ public class EnemySpawner : MonoBehaviour
   {
     float currentDistance = Vector3.Distance(_target.transform.position, _finishTransform.position);
     return currentDistance / _maxDistanceToFinish;
+  }
+
+  private void StopSpawning()
+  {
+    _isGameRunning = false;
   }
 }

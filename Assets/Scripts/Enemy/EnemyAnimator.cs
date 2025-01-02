@@ -4,13 +4,6 @@ namespace Enemy
 {
   public class EnemyAnimator
   {
-    private enum EnemyAnimation
-    {
-      Idle,
-      Run,
-      Victory
-    }
-    
     private readonly Animator _animator;
 
     public EnemyAnimator(Animator animator)
@@ -18,11 +11,11 @@ namespace Enemy
       _animator = animator;
     }
 
-    public void PlayIdleAnimation() => PlayAnimation(EnemyAnimation.Idle);
-    public void PlayRunAnimation() => PlayAnimation(EnemyAnimation.Run);
-    public void PlayVictoryAnimation() => PlayAnimation(EnemyAnimation.Victory);
+    public void PlayIdleAnimation() => PlayAnimation(Enums.EnemyAnimation.Idle);
+    public void PlayRunAnimation() => PlayAnimation(Enums.EnemyAnimation.Run);
+    public void PlayVictoryAnimation() => PlayAnimation(Enums.EnemyAnimation.Victory);
 
-    private void PlayAnimation(EnemyAnimation animationType)
+    private void PlayAnimation(Enums.EnemyAnimation animationType)
     {
       _animator.SetTrigger(animationType.ToString());
     }

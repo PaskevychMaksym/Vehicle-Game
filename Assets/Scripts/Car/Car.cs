@@ -9,27 +9,31 @@ namespace Car
     private CarMover _carMover;
     private int _maxHealth;
     private int _currentHealth;
-    
+
     private GameConfig _gameConfig;
+    private GameController _gameController;
 
     [Inject]
-    private void Construct(GameConfig gameConfig)
+    private void Construct(GameConfig gameConfig, GameController gameController)
     {
       _gameConfig = gameConfig;
+      _gameController = gameController;
     }
 
     private void Awake()
     {
       _carMover = GetComponent<CarMover>();
-      
+
       var carParameters = _gameConfig.CarParameters;
       _carMover.Initialize(carParameters.Speed);
 
       _maxHealth = carParameters.MaxHealth;
       _currentHealth = _maxHealth;
+      
+      _carMover.ToggleEngine(false);
     }
 
-    private void Start()
+    public void StartCar()
     {
       _carMover.ToggleEngine(true);
     }
@@ -49,6 +53,8 @@ namespace Car
     {
       _carMover.ToggleEngine(false);
       Debug.Log("Car destroyed!");
+      
+      _gameController.EndGame(false);
     }
   }
 }

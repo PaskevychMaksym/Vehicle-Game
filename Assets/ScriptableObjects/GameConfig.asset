@@ -17,7 +17,7 @@ MonoBehaviour:
     Speed: 4
     MaxHealth: 10
   _turretParameters:
-    RotationSpeed: 60
+    RotationSpeed: 40
     MaxRotationAngle: 60
     FireRate: 0.3
   _bulletParameters:
