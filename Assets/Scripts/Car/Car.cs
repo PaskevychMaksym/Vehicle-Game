@@ -18,6 +18,9 @@ namespace Car
     {
       _gameConfig = gameConfig;
       _gameController = gameController;
+
+      _gameController.OnGameStarted += StartCar;
+      _gameController.OnGameEnded += StopCar;
     }
 
     private void Awake()
@@ -33,9 +36,20 @@ namespace Car
       _carMover.ToggleEngine(false);
     }
 
-    public void StartCar()
+    private void OnDestroy()
+    {
+      _gameController.OnGameStarted -= StartCar;
+      _gameController.OnGameEnded -= StopCar;
+    }
+
+    private void StartCar()
     {
       _carMover.ToggleEngine(true);
+    }
+    
+    private void StopCar()
+    {
+      _carMover.ToggleEngine(false);
     }
 
     public void TakeDamage(int damage)
@@ -45,15 +59,13 @@ namespace Car
 
       if (_currentHealth <= 0)
       {
-        OnCarDestroyed();
+        CarDestroyed();
       }
     }
 
-    private void OnCarDestroyed()
+    private void CarDestroyed()
     {
       _carMover.ToggleEngine(false);
-      Debug.Log("Car destroyed!");
-      
       _gameController.EndGame(false);
     }
   }

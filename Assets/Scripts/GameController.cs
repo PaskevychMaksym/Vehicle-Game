@@ -7,22 +7,17 @@ public class GameController : MonoBehaviour
 {
   public event Action OnGameStarted;
   public event Action OnGameEnded;
-  
-  private CamerasController _cameraController;
+
   private StartMenu _startMenu;
   private ConclusionMenu _conclusionMenu;
-  private Car.Car _car;
 
   [Inject]
-  public void Construct(CamerasController cameraController, 
+  public void Construct(
     StartMenu startMenu,
-    ConclusionMenu conclusionMenu,
-    Car.Car car)
+    ConclusionMenu conclusionMenu)
   {
-    _cameraController = cameraController;
     _startMenu = startMenu;
     _conclusionMenu = conclusionMenu;
-    _car = car;
   }
 
   private void Start()
@@ -37,11 +32,13 @@ public class GameController : MonoBehaviour
   {
     _startMenu.OnStartGame -= StartGame;
     _conclusionMenu.OnRestart -= RestartGame;
+
+    OnGameEnded = null;
+    OnGameStarted = null;
   }
 
   private void StartGame()
   {
-    _car.StartCar();
     OnGameStarted?.Invoke();
   }
 

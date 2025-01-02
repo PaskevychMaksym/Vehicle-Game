@@ -10,7 +10,7 @@ public class MainSceneInstaller : MonoInstaller
   [SerializeField] private GameController _gameController;
   [SerializeField] private Transform _poolParent;
   [SerializeField] private Car.Car _car;
-  [SerializeField] private Transform _finishTransform;
+  [SerializeField] private FinishLine _finishLine;
   [SerializeField] private CamerasController _camerasController;
   [SerializeField] private StartMenu _startMenu;
   [SerializeField] private ConclusionMenu _conclusionMenu;
@@ -21,7 +21,7 @@ public class MainSceneInstaller : MonoInstaller
     Container.Bind<GameConfig>().FromInstance(_gameConfig).AsSingle().NonLazy();
     Container.Bind<GameController>().FromInstance(_gameController).AsSingle().NonLazy();
     Container.Bind<Car.Car>().FromInstance(_car).AsSingle();
-    Container.Bind<Transform>().FromInstance(_finishTransform).AsSingle();
+    Container.Bind<FinishLine>().FromInstance(_finishLine).AsSingle();
     Container.Bind<CamerasController>().FromInstance(_camerasController).AsSingle();
     Container.Bind<StartMenu>().FromInstance(_startMenu).AsSingle();
     Container.Bind<ConclusionMenu>().FromInstance(_conclusionMenu).AsSingle();

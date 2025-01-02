@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carParameters:
     CarPrefab: {fileID: 3472935732474495694, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
-    Speed: 4
+    Speed: 6
     MaxHealth: 10
   _turretParameters:
     RotationSpeed: 40

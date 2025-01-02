@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
   
   private ObjectFactory<Enemy.EnemyController> _enemyFactory;
   private Car.Car _target;
-  private Transform _finishTransform;
+  private FinishLine _finishTransform;
   private EnemyParameters _enemyParameters;
   private EnemiesSpawnParameters _spawnParameters;
 
@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
   private void Construct(
     ObjectFactory<Enemy.EnemyController> enemyFactory,
     Car.Car target, 
-    Transform finishTransform,
+    FinishLine finishTransform,
     GameConfig gameConfig,
     GameController gameController)
   {
@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
 
   private void Start()
   {
-    _maxDistanceToFinish = Vector3.Distance(_target.transform.position, _finishTransform.position);
+    _maxDistanceToFinish = Vector3.Distance(_target.transform.position, _finishTransform.transform.position);
     SpawnInitialEnemies();
   }
 
@@ -85,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
   
   private float CalculateProgress()
   {
-    float currentDistance = Vector3.Distance(_target.transform.position, _finishTransform.position);
+    float currentDistance = Vector3.Distance(_target.transform.position, _finishTransform.transform.position);
     return currentDistance / _maxDistanceToFinish;
   }
 
