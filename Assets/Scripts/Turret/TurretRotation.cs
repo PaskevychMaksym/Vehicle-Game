@@ -12,7 +12,6 @@ namespace Turret
     private float _maxRotationAngle;
 
     private float _currentRotationY;
-    private float _targetRotationY;
 
     [Inject]
     private void Construct(IInputService inputService, GameConfig gameConfig)
@@ -28,7 +27,11 @@ namespace Turret
         return;
 
       Vector2 inputDelta = _inputService.GetInputDelta();
-      RotateTurret(inputDelta.x);
+      
+      if (inputDelta != Vector2.zero)
+      {
+        RotateTurret(inputDelta.x);
+      }
     }
 
     private void RotateTurret(float deltaX)
