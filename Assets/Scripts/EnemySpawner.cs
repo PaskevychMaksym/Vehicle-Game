@@ -10,24 +10,27 @@ public class EnemySpawner : MonoBehaviour
   private const float PROGRESS_THRESHOLD = 0.2f;
   
   private float _maxDistanceToFinish;
+  private Transform _followCameraTransform;
   private bool _isGameRunning;
   
   private ObjectFactory<Enemy.EnemyController> _enemyFactory;
   private EnemyParameters _enemyParameters;
   private EnemiesSpawnParameters _spawnParameters;
-  private Car.Car _target;
+  private Car.CarController _target;
 
   [Inject]
   private void Construct(
     ObjectFactory<Enemy.EnemyController> enemyFactory,
     GameConfig gameConfig,
-    Car.Car target,
-    GameController gameController)
+    Car.CarController target,
+    GameController gameController,
+    CamerasController camerasController)
   {
     _enemyFactory = enemyFactory;
     _enemyParameters = gameConfig.EnemyParameters;
     _spawnParameters = gameConfig.EnemiesSpawnParameters;
     _target = target;
+    _followCameraTransform = camerasController.GetCamera(Enums.CameraType.Follow).transform;
     
     gameController.OnGameStarted += StartSpawning;
     gameController.OnGameEnded += StopSpawning;
@@ -66,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     enemyController.transform.position = spawnPosition;
     enemyController.transform.rotation = spawnRotation;
 
-    enemyController.Initialize(_enemyParameters, _target, _enemyFactory);
+    enemyController.Initialize(_enemyParameters, _target, _enemyFactory,_followCameraTransform);
   }
   
   private Vector3 GetRandomSpawnPosition()

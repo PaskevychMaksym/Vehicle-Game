@@ -19,10 +19,10 @@ namespace Enemy
 
     private EnemyParameters _parameters;
     private ObjectFactory<EnemyController> _factory;
-    private Car.Car _target;
+    private Car.CarController _target;
 
     public EnemyParameters Parameters => _parameters;
-    public Car.Car Target => _target;
+    public Car.CarController Target => _target;
     public Health Health => _health;
     public HealthSlider HealthSlider => _healthSlider;
     public EnemyAnimator Animator => _animator;
@@ -31,7 +31,10 @@ namespace Enemy
     public ObjectFactory<EnemyController> Factory => _factory;
     public EnemyVisualEffects EnemyVisualEffects => _enemyVisualEffects;
 
-    public void Initialize (EnemyParameters parameters, Car.Car target, ObjectFactory<EnemyController> factory)
+    public void Initialize (EnemyParameters parameters,
+      Car.CarController target,
+      ObjectFactory<EnemyController> factory,
+      Transform followCameraTransform)
     {
       _parameters = parameters;
       _target = target;
@@ -43,8 +46,10 @@ namespace Enemy
 
       _health = new Health(_parameters.MaxHealth);
       _health.OnDeath += HandleDeath;
-      
-      _healthSlider.Initialize(_health, transform);
+
+      _healthSlider.Initialize(_health, followCameraTransform);
+
+      _target.Health.OnDeath += () => _stateMachine.ChangeState(new VictoryState());
 
       _stateMachine.ChangeState(new IdleState());
     }
@@ -67,10 +72,13 @@ namespace Enemy
 
     private void OnTriggerEnter (Collider other)
     {
-      if (other.transform == _target.transform)
+      if (other.transform != _target.transform)
       {
-        _stateMachine.ChangeState(new DieState());
+        return;
       }
+
+      _target.TakeDamage(_parameters.Damage);
+      _stateMachine.ChangeState(new DieState());
     }
 
     private bool ShouldBeReturnedToPool() => _target != null && transform.position.z < _target.transform.position.z - _parameters.DespawnDistance;

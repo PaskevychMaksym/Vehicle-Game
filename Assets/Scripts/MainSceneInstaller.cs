@@ -2,6 +2,7 @@ using Interfaces;
 using ScriptableObjects;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class MainSceneInstaller : MonoInstaller
@@ -9,7 +10,7 @@ public class MainSceneInstaller : MonoInstaller
     [SerializeField] private GameConfig _gameConfig;
     [SerializeField] private GameController _gameController;
     [SerializeField] private Transform _poolParent;
-    [SerializeField] private Car.Car _car;
+    [SerializeField] private Car.CarController _carController;
     [SerializeField] private FinishLine _finishLine;
     [SerializeField] private CamerasController _camerasController;
     [SerializeField] private StartMenu _startMenu;
@@ -40,7 +41,7 @@ public class MainSceneInstaller : MonoInstaller
     {
         Container.Bind<GameConfig>().FromInstance(_gameConfig).AsSingle();
         Container.Bind<GameController>().FromInstance(_gameController).AsSingle();
-        Container.Bind<Car.Car>().FromInstance(_car).AsSingle();
+        Container.Bind<Car.CarController>().FromInstance(_carController).AsSingle();
         Container.Bind<FinishLine>().FromInstance(_finishLine).AsSingle();
     }
 

@@ -4,20 +4,27 @@ using Zenject;
 
 namespace Car
 {
-  public class Car : MonoBehaviour
+  public class CarController : MonoBehaviour
   {
-    private CarMover _carMover;
-    private int _maxHealth;
-    private int _currentHealth;
+    [SerializeField] private CarMover _carMover;
+    [SerializeField] private HealthSlider _healthSlider;
+    
+    private Health _health;
+    private Transform _followCameraTransform;
 
     private GameConfig _gameConfig;
     private GameController _gameController;
 
+    public Health Health => _health;
+
     [Inject]
-    private void Construct(GameConfig gameConfig, GameController gameController)
+    private void Construct(GameConfig gameConfig, 
+      GameController gameController,
+      CamerasController camerasController)
     {
       _gameConfig = gameConfig;
       _gameController = gameController;
+      _followCameraTransform = camerasController.GetCamera(Enums.CameraType.Follow).transform;
 
       _gameController.OnGameStarted += StartCar;
       _gameController.OnGameEnded += StopCar;
@@ -25,14 +32,14 @@ namespace Car
 
     private void Awake()
     {
-      _carMover = GetComponent<CarMover>();
-
       var carParameters = _gameConfig.CarParameters;
       _carMover.Initialize(carParameters.Speed);
 
-      _maxHealth = carParameters.MaxHealth;
-      _currentHealth = _maxHealth;
+      _health = new Health(carParameters.MaxHealth);
+      _health.OnDeath +=  CarDestroyed;
       
+      _healthSlider.Initialize(_health,_followCameraTransform);
+
       _carMover.ToggleEngine(false);
     }
 
@@ -54,13 +61,8 @@ namespace Car
 
     public void TakeDamage(int damage)
     {
-      _currentHealth -= damage;
-      _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
-
-      if (_currentHealth <= 0)
-      {
-        CarDestroyed();
-      }
+     _health.TakeDamage(damage);
+     _healthSlider.UpdateSlider();
     }
 
     private void CarDestroyed()

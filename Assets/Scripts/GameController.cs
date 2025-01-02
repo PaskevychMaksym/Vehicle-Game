@@ -13,25 +13,25 @@ public class GameController : MonoBehaviour
   
   private StartMenu _startMenu;
   private ConclusionMenu _conclusionMenu;
-  private Car.Car _car;
+  private Car.CarController _carController;
   private FinishLine _finishLine;
 
   [Inject]
   public void Construct(
     StartMenu startMenu,
     ConclusionMenu conclusionMenu,
-    Car.Car car,
+    Car.CarController carController,
     FinishLine finishLine)
   {
     _startMenu = startMenu;
     _conclusionMenu = conclusionMenu;
-    _car = car;
+    _carController = carController;
     _finishLine = finishLine;
   }
 
   private void Start()
   {
-    _maxDistance = Vector3.Distance(_car.transform.position, _finishLine.transform.position);
+    _maxDistance = Vector3.Distance(_carController.transform.position, _finishLine.transform.position);
     
     _startMenu.OnStartGame += StartGame;
     _conclusionMenu.OnRestart += RestartGame;
@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour
   
   private void Update()
   {
-    float currentDistance = Vector3.Distance(_car.transform.position, _finishLine.transform.position);
+    float currentDistance = Vector3.Distance(_carController.transform.position, _finishLine.transform.position);
     float progress = currentDistance / _maxDistance;
 
     OnProgressUpdated?.Invoke(progress);

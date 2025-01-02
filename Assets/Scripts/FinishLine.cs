@@ -13,7 +13,7 @@ public class FinishLine : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    if (other.TryGetComponent<Car.Car>(out var car))
+    if (other.TryGetComponent<Car.CarController>(out var car))
     {
       _gameController.EndGame(true);
     }

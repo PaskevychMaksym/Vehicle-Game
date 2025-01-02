@@ -12,7 +12,7 @@ public class HealthSlider: MonoBehaviour
   public void Initialize (Health health, Transform followCamera)
   {
     _health = health;
-    _lookTarget = Camera.main.transform;
+    _lookTarget = followCamera.transform;
 
     _slider.maxValue = _health.CurrentHealth;
     _slider.value = _health.CurrentHealth;
