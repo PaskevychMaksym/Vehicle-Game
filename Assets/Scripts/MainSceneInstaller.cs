@@ -47,8 +47,8 @@ public class MainSceneInstaller : MonoInstaller
 
     private void ConfigureObjectFactories()
     {
-        Container.Bind<ObjectFactory<Bullet>>()
-            .To<ObjectFactory<Bullet>>()
+        Container.Bind<ObjectFactory<Bullet.Bullet>>()
+            .To<ObjectFactory<Bullet.Bullet>>()
             .AsSingle()
             .WithArguments(_gameConfig.BulletParameters.BulletPrefab, _poolParent);
 

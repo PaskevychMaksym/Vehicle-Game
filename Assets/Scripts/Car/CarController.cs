@@ -43,17 +43,20 @@ namespace Car
       _health.OnDeath +=  CarDestroyed;
 
       _carMover.ToggleEngine(false);
+      _carVisualEffects.ToggleTrail(false);
     }
 
     private void StartCar()
     {
       _carMover.ToggleEngine(true);
+      _carVisualEffects.ToggleTrail(true);
       _healthSlider.Initialize(_health,_followCameraTransform);
     }
     
     private void StopCar()
     {
       _carMover.ToggleEngine(false);
+      _carVisualEffects.ToggleTrail(false);
     }
 
     public void TakeDamage(int damage)
