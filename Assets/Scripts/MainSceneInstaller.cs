@@ -1,8 +1,8 @@
+using InputHandler;
 using Interfaces;
 using ScriptableObjects;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 public class MainSceneInstaller : MonoInstaller

@@ -1,7 +1,9 @@
 using Interfaces;
 using UnityEngine;
 
-public class TouchInputProvider : IInputProvider
+namespace InputHandler
+{
+  public class TouchInputProvider : IInputProvider
   {
     public Vector2 GetCurrentPosition()
     {
@@ -18,3 +20,4 @@ public class TouchInputProvider : IInputProvider
       return Input.GetTouch(0).phase == TouchPhase.Began;
     }
   }
+}

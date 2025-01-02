@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TurretVisualEffects : VisualEffects
+namespace Turret
 {
-    
+  public class TurretVisualEffects : VisualEffects
+  {}
 }

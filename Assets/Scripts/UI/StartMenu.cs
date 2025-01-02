@@ -25,7 +25,7 @@ namespace UI
       gameObject.SetActive(true);
     }
 
-    public void Hide()
+    private void Hide()
     {
       gameObject.SetActive(false);
     }

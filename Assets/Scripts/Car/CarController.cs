@@ -1,5 +1,6 @@
 using System;
 using ScriptableObjects;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -21,7 +22,8 @@ namespace Car
     public Health Health => _health;
 
     [Inject]
-    private void Construct(GameConfig gameConfig, 
+    private void Construct(
+      GameConfig gameConfig, 
       GameController gameController,
       CamerasController camerasController)
     {

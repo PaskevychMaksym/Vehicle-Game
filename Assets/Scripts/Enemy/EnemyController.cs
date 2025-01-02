@@ -1,7 +1,7 @@
 using Parameters;
 using UnityEngine;
-using DefaultNamespace;
 using Enemy.StateMachine;
+using UI;
 
 namespace Enemy
 {
@@ -31,7 +31,8 @@ namespace Enemy
     public ObjectFactory<EnemyController> Factory => _factory;
     public EnemyVisualEffects EnemyVisualEffects => _enemyVisualEffects;
 
-    public void Initialize (EnemyParameters parameters,
+    public void Initialize (
+      EnemyParameters parameters,
       Car.CarController target,
       ObjectFactory<EnemyController> factory,
       Transform followCameraTransform)

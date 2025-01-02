@@ -1,6 +1,8 @@
 using Interfaces;
 using UnityEngine;
 
+namespace InputHandler
+{
   public class InputService : IInputService
   {
     private readonly IInputProvider _inputProvider;
@@ -37,3 +39,4 @@ using UnityEngine;
       return _inputProvider.IsActive();
     }
   }
+}

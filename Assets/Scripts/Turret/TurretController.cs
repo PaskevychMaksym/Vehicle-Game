@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Turret
 {
-  public class Turret : MonoBehaviour
+  public class TurretController : MonoBehaviour
   {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private TurretVisualEffects _turretVisualEffects;
@@ -15,7 +15,8 @@ namespace Turret
     private bool _isActive;
 
     [Inject]
-    private void Construct(BulletSpawner bulletSpawner, 
+    private void Construct(
+      BulletSpawner bulletSpawner, 
       GameConfig gameConfig,
       GameController gameController,
       Car.CarController carController)

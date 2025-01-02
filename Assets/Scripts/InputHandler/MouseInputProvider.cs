@@ -1,20 +1,23 @@
 using Interfaces;
 using UnityEngine;
 
+namespace InputHandler
+{
   public class MouseInputProvider : IInputProvider
   {
     public Vector2 GetCurrentPosition()
     {
-      return UnityEngine.Input.mousePosition;
+      return Input.mousePosition;
     }
 
     public bool IsActive()
     {
-      return UnityEngine.Input.GetMouseButton(0);
+      return Input.GetMouseButton(0);
     }
 
     public bool IsBegin()
     {
-      return UnityEngine.Input.GetMouseButtonDown(0);
+      return Input.GetMouseButtonDown(0);
     }
   }
+}

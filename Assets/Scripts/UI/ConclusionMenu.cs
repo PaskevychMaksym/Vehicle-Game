@@ -7,6 +7,9 @@ namespace UI
 {
   public class ConclusionMenu : MonoBehaviour
   {
+    private const string WIN = "You Win";
+    private const string LOSE = "You Lose";
+    
     public event Action OnRestart;
     
     [SerializeField] private TextMeshProUGUI _resultText;
@@ -25,7 +28,7 @@ namespace UI
 
     public void Show(bool isWin)
     {
-      _resultText.text = isWin ? "You Win" : "You Lose";
+      _resultText.text = isWin ? WIN : LOSE;
       gameObject.SetActive(true);
     }
 

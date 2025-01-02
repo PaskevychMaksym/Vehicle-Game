@@ -1,5 +1,3 @@
-using DefaultNamespace;
-
 namespace Enemy.StateMachine
 {
   public class DieState : State<EnemyController>
