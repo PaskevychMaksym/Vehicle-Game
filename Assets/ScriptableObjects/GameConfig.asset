@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carParameters:
     CarPrefab: {fileID: 3472935732474495694, guid: be71a414c941d0c4bad9ee135233acec, type: 3}
-    Speed: 6
+    Speed: 9
     MaxHealth: 10
   _turretParameters:
     RotationSpeed: 40
     MaxRotationAngle: 60
-    FireRate: 0.3
+    FireRate: 0.2
   _bulletParameters:
     BulletPrefab: {fileID: 6352755858710859555, guid: 487dbb68ef818f247a229a25fa68bcac, type: 3}
     Speed: 60
@@ -28,13 +28,12 @@ MonoBehaviour:
   _enemyParameters:
     EnemyControllerPrefab: {fileID: 3237504381870937976, guid: 4f699a2f413ce3a41a3e86891b98c8c1, type: 3}
     DespawnDistance: 10
-    Speed: 5
+    Speed: 4
     RotationSpeed: 20
     MaxHealth: 2
     Damage: 1
     ChaseDistance: 20
   _enemiesSpawnParameters:
-    StartAmount: 5
-    Interval: 0.5
-    RangeX: 7
+    Interval: 0.8
+    RangeX: 6
     Distance: 30

@@ -7,45 +7,31 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
+  private const float PROGRESS_THRESHOLD = 0.2f;
+  
   private float _maxDistanceToFinish;
   private bool _isGameRunning;
   
   private ObjectFactory<Enemy.EnemyController> _enemyFactory;
-  private Car.Car _target;
-  private FinishLine _finishTransform;
   private EnemyParameters _enemyParameters;
   private EnemiesSpawnParameters _spawnParameters;
+  private Car.Car _target;
 
   [Inject]
   private void Construct(
     ObjectFactory<Enemy.EnemyController> enemyFactory,
-    Car.Car target, 
-    FinishLine finishTransform,
     GameConfig gameConfig,
+    Car.Car target,
     GameController gameController)
   {
     _enemyFactory = enemyFactory;
-    _target = target;
-    _finishTransform = finishTransform;
     _enemyParameters = gameConfig.EnemyParameters;
     _spawnParameters = gameConfig.EnemiesSpawnParameters;
+    _target = target;
     
     gameController.OnGameStarted += StartSpawning;
     gameController.OnGameEnded += StopSpawning;
-  }
-
-  private void Start()
-  {
-    _maxDistanceToFinish = Vector3.Distance(_target.transform.position, _finishTransform.transform.position);
-    SpawnInitialEnemies();
-  }
-
-  private void SpawnInitialEnemies()
-  {
-    for (int i = 0; i < _spawnParameters.StartAmount; i++)
-    {
-      SpawnEnemy();
-    }
+    gameController.OnProgressUpdated += HandleProgressUpdated;
   }
 
   private void StartSpawning()
@@ -56,11 +42,19 @@ public class EnemySpawner : MonoBehaviour
   
   private IEnumerator SpawnEnemiesRoutine()
   {
-    while (_isGameRunning && CalculateProgress() > 0.2f)
+    while (_isGameRunning)
     {
       yield return new WaitForSeconds(_spawnParameters.Interval);
       
       SpawnEnemy();
+    }
+  }
+  
+  private void HandleProgressUpdated(float progress)
+  {
+    if (progress < PROGRESS_THRESHOLD)
+    {
+      StopSpawning();
     }
   }
   
@@ -81,12 +75,6 @@ public class EnemySpawner : MonoBehaviour
     spawnPosition.x += Random.Range(-_spawnParameters.RangeX, _spawnParameters.RangeX);
     spawnPosition.y = 0;
     return spawnPosition;
-  }
-  
-  private float CalculateProgress()
-  {
-    float currentDistance = Vector3.Distance(_target.transform.position, _finishTransform.transform.position);
-    return currentDistance / _maxDistanceToFinish;
   }
 
   private void StopSpawning()

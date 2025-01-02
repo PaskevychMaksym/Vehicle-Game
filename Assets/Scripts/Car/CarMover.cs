@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarMover : MonoBehaviour
@@ -17,6 +15,11 @@ public class CarMover : MonoBehaviour
   public void ToggleEngine(bool value)
   {
     _isMoving = value;
+
+    if (!_isMoving)
+    {
+      _carRigidbody.velocity = Vector3.zero;
+    }
   }
 
   private void FixedUpdate()
